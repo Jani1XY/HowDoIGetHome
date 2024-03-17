@@ -7,18 +7,23 @@ eso = False
 
 
 
-def printResult(ido1, ido2, telepules1, telepules2, allomas1, allomas2, busz1, busz2, erkezes1, erkezes2):
+def printResult(ido1, ido2, telepules1, telepules2, allomas1, allomas2, busz1, busz2, erkezes1, erkezes2, seta):
     # print("Pécs,             15:30-kor            a            8-as kocsiállásról budapesti busz, Bonyhádig")
     stm = telepules1+", "+ ido1+ "-kor a "+ allomas1 + " kocsiállásról " + busz1 + "i busz, " + erkezes1
 
-    if telepules2 != None:
-
+    if seta == True:
         stm = stm + "\n|" + "\n|" + "\nV"
-        stm = stm + telepules2+", "+ ido2+ "-kor a "+ allomas2 + " kocsiállásról " + busz2 + "i busz, " + erkezes2
+        stm = stm + erkezes1 + ", séta hazáig"
+    else:
 
+        if telepules2 != None:
+
+            stm = stm + "\n|" + "\n|" + "\nV"
+            stm = stm + telepules2+", "+ ido2+ "-kor a "+ allomas2 + " kocsiállásról " + busz2 + "i busz, " + erkezes2
+        
     print(stm)
 
-#printResult("15:30", None,  "Pécs", None, "8-as", None, "budapest", None, "Bonyhádig", None)
+#printResult("15:30", None,  "Pécs", None, "8-as", None, "budapest", None, "Bonyhádig", None, False)
 
 def timeToMin(time):
        minute = time.split(":")
@@ -83,8 +88,10 @@ def egyorasi():
         print("V")
         print("Bonyhádon, 14:40-kor 7-es kocsiállás, Kismányokig")
     else:
-        pass
-    print("Bonyhádon, 14:40-kor 7-es kocsiállás, Kismányokig")
+        print("Bonyhádon, 13:35-kor 7-es kocsiállás, kismányoki elágázásig")
+        print("|")
+        print("V")
+        print("kismányoki elágazásnál, séta hazáig")
 
 def ketorasi():
     global hely
@@ -104,10 +111,8 @@ def ketorasi():
             print("V")
             print("kismányoki elágazásnál, séta hazáig")
     else:
-        print("Bonyhádon, 15:45-kor 10-es kocsiállás, kismányoki elágazásig")
-        print("|")
-        print("V")
-        print("kismányoki elágazásnál, séta hazáig")
+        print("Bonyhádon, 14:40-kor 7-es kocsiállás, kismányokig")
+
 
 def haromorasi():
     global hely
@@ -116,16 +121,21 @@ def haromorasi():
         print("Pécs, 15:30-kor a 8-as kocsiállásról budapesti busz, Bonyhádig")
         print("|")
         print("V")
+        print("Bonyhádon, 16:25-kor 6-es kocsiállás, Kismányokig")
     else:
-        pass
-    print("Bonyhádon, 16:25-kor 6-es kocsiállás, Kismányokig")
+        print("Bonyhádon, 15:45-kor 10-es kocsiállás, kismányoki elágazásig")
+        print("|")
+        print("V")
+        print("kismányoki elágazásnál, séta hazáig")
+
+def negyorasi():
+    print("Pécs, 16:30-kor a 8-as kocsiállásról budapesti busz, Bonyhádig")
+    print("|")
+    print("V")
+    print("Bonyhádon, anya hazavisz")
 
 
-print(timeToMinRev(870))
-print(timeToMinRev(930))
-print(timeToMinRev(880))
-print(timeToMinRev(945))
-print(timeToMinRev(985))
+print(timeToMin("13:35"))
 
 print("Iskola után Jani hogy megy haza?\n")
 
@@ -150,17 +160,21 @@ if hely == "Pécs":
 
 else:
 
-    if timeToMin(ido) <  880: # 14:40
+    if timeToMin(ido) <  815: # 13:35
         print()
         egyorasi()
 
-    elif timeToMin(ido) < 945: # 15:45
+    elif timeToMin(ido) < 880: # 14:40
         print()
         ketorasi()
 
-    elif timeToMin(ido) < 985: # 16:25
+    elif timeToMin(ido) < 945: # 15:45
         print()
         haromorasi()
+
+    elif timeToMin(ido) < 990: # 16:30
+        print()
+        negyorasi()
 
 
 
